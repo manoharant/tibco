@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="customers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="customerName">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="contactLastName">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="contactFirstName">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="phone">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="addressLine1">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="addressLine2" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="city">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="state" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="postalCode" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="15"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="country">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="salesRepEmployeeNumber" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="creditLimit" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:totalDigits value="10"/>
+							<xs:fractionDigits value="2"/>
+							<xs:minExclusive value="-100000000"/>
+							<xs:maxExclusive value="100000000"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="orders" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="payments" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="customers_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="customerNumber"/>
+		</xs:key>
+		<xs:keyref name="orders_ForeignKey_1" refer="customers_PrimaryKey_1">
+			<xs:selector xpath="orders"/>
+			<xs:field xpath="customerNumber"/>
+		</xs:keyref>
+		<xs:keyref name="payments_ForeignKey_1" refer="customers_PrimaryKey_1">
+			<xs:selector xpath="payments"/>
+			<xs:field xpath="customerNumber"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="employees">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="employeeNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="lastName">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="firstName">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="extension">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="email">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="100"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="officeCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="reportsTo" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="jobTitle">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="customers" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="employees" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="employees_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="employeeNumber"/>
+		</xs:key>
+		<xs:keyref name="customers_ForeignKey_1" refer="employees_PrimaryKey_1">
+			<xs:selector xpath="customers"/>
+			<xs:field xpath="salesRepEmployeeNumber"/>
+		</xs:keyref>
+		<xs:keyref name="employees_ForeignKey_1" refer="employees_PrimaryKey_1">
+			<xs:selector xpath="employees"/>
+			<xs:field xpath="reportsTo"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="offices">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="officeCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="city">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="phone">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="addressLine1">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="addressLine2" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="state" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="country">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="postalCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="15"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="territory">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="employees" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="offices_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="officeCode"/>
+		</xs:key>
+		<xs:keyref name="employees_ForeignKey_2" refer="offices_PrimaryKey_1">
+			<xs:selector xpath="employees"/>
+			<xs:field xpath="officeCode"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="orderdetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="orderNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="productCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="15"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="quantityOrdered">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="priceEach">
+					<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:totalDigits value="10"/>
+							<xs:fractionDigits value="2"/>
+							<xs:minExclusive value="-100000000"/>
+							<xs:maxExclusive value="100000000"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="orderLineNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:short">
+							<xs:minInclusive value="-32768"/>
+							<xs:maxInclusive value="32767"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="orderdetails_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="orderNumber"/>
+			<xs:field xpath="productCode"/>
+		</xs:key>
+	</xs:element>
+	<xs:element name="orders">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="orderNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="orderDate">
+					<xs:simpleType>
+						<xs:restriction base="xs:date">
+							<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}"/>
+							<xs:minInclusive value="1000-01-01"/>
+							<xs:maxInclusive value="9999-12-31"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="requiredDate">
+					<xs:simpleType>
+						<xs:restriction base="xs:date">
+							<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}"/>
+							<xs:minInclusive value="1000-01-01"/>
+							<xs:maxInclusive value="9999-12-31"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="shippedDate" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:date">
+							<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}"/>
+							<xs:minInclusive value="1000-01-01"/>
+							<xs:maxInclusive value="9999-12-31"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="status">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="15"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="comments" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="65535"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="customerNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="orderdetails" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="orders_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="orderNumber"/>
+		</xs:key>
+		<xs:keyref name="orderdetails_ForeignKey_1" refer="orders_PrimaryKey_1">
+			<xs:selector xpath="orderdetails"/>
+			<xs:field xpath="orderNumber"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="payments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customerNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="checkNumber">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="paymentDate">
+					<xs:simpleType>
+						<xs:restriction base="xs:date">
+							<xs:pattern value="\p{Nd}{4}-\p{Nd}{2}-\p{Nd}{2}"/>
+							<xs:minInclusive value="1000-01-01"/>
+							<xs:maxInclusive value="9999-12-31"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="amount">
+					<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:totalDigits value="10"/>
+							<xs:fractionDigits value="2"/>
+							<xs:minExclusive value="-100000000"/>
+							<xs:maxExclusive value="100000000"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="payments_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="customerNumber"/>
+			<xs:field xpath="checkNumber"/>
+		</xs:key>
+	</xs:element>
+	<xs:element name="person">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pid">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="name" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="45"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="location" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="45"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="person_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="pid"/>
+		</xs:key>
+	</xs:element>
+	<xs:element name="productlines">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="productLine">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="textDescription" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="4000"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="htmlDescription" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="16777215"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="image" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:base64Binary">
+							<xs:maxLength value="16777215"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="products" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="productlines_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="productLine"/>
+		</xs:key>
+		<xs:keyref name="products_ForeignKey_1" refer="productlines_PrimaryKey_1">
+			<xs:selector xpath="products"/>
+			<xs:field xpath="productLine"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="products">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="productCode">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="15"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="productName">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="70"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="productLine">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="productScale">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="10"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="productVendor">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="50"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="productDescription">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="65535"/>
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="quantityInStock">
+					<xs:simpleType>
+						<xs:restriction base="xs:short">
+							<xs:minInclusive value="-32768"/>
+							<xs:maxInclusive value="32767"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="buyPrice">
+					<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:totalDigits value="10"/>
+							<xs:fractionDigits value="2"/>
+							<xs:minExclusive value="-100000000"/>
+							<xs:maxExclusive value="100000000"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="MSRP">
+					<xs:simpleType>
+						<xs:restriction base="xs:decimal">
+							<xs:totalDigits value="10"/>
+							<xs:fractionDigits value="2"/>
+							<xs:minExclusive value="-100000000"/>
+							<xs:maxExclusive value="100000000"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element ref="orderdetails" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="products_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="productCode"/>
+		</xs:key>
+		<xs:keyref name="orderdetails_ForeignKey_2" refer="products_PrimaryKey_1">
+			<xs:selector xpath="orderdetails"/>
+			<xs:field xpath="productCode"/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="user">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id">
+					<xs:simpleType>
+						<xs:restriction base="xs:int">
+							<xs:minInclusive value="-2147483648"/>
+							<xs:maxInclusive value="2147483647"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="username" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="45"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="address" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="45"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="email" nillable="true" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="45"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="user_PrimaryKey_1">
+			<xs:selector xpath="."/>
+			<xs:field xpath="id"/>
+		</xs:key>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:tns="http://xmlns.example.com/1490990877338" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns0="http://benchresources.in/entities/music" xmlns:jms="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:jndi="http://www.tibco.com/namespaces/ws/2004/soap/apis/jndi" name="Untitled" targetNamespace="http://xmlns.example.com/1490990877338">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://benchresources.in/entities/music" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="BusinessFaultType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="errorCode" type="xs:int"/>
+                        <xs:element name="errorMessage" type="xs:string"/>
+                        <xs:element name="errorDescription" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MovieListType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:MovieType" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MovieType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="movieName" type="xs:string"/>
+                        <xs:element name="year" type="xs:string"/>
+                        <xs:element name="director" type="xs:string"/>
+                        <xs:element name="comments" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MusicListRequestType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="composerName" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MusicListResponseType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="composer" type="xs:string"/>
+                        <xs:element ref="ns0:MovieListType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="WSDL-service0">
+        <wsdl:port name="IMusicServiceEndpoint0" binding="tns:IMusicServiceEndpoint0Binding">
+            <soap:address location=""/>
+            <jms:connectionFactory>QueueConnectionFactory</jms:connectionFactory>
+            <jms:targetAddress destination="queue">queue.sample</jms:targetAddress>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="IMusicService">
+        <wsdl:operation name="getAllMovieDetailByComposer">
+            <wsdl:input message="tns:getAllMovieDetailByComposer"/>
+            <wsdl:output message="tns:getAllMovieDetailByComposerResponse"/>
+            <wsdl:fault name="BusinessException" message="tns:BusinessException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="IMusicServiceEndpoint0Binding" type="tns:IMusicService">
+        <soap:binding style="document" transport="http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS"/>
+        <jms:binding messageFormat="bytes"/>
+        <wsdl:operation name="getAllMovieDetailByComposer">
+            <soap:operation style="document" soapAction="/webservices/WSDL-service0.serviceagent/IMusicServiceEndpoint0/getAllMovieDetailByComposer"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="parameters"/>
+            </wsdl:output>
+            <wsdl:fault name="BusinessException">
+                <soap:fault use="literal" name="BusinessException"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="getAllMovieDetailByComposer">
+        <wsdl:part name="parameters" element="ns0:MusicListRequestType"/>
+    </wsdl:message>
+    <wsdl:message name="getAllMovieDetailByComposerResponse">
+        <wsdl:part name="parameters" element="ns0:MusicListResponseType"/>
+    </wsdl:message>
+    <wsdl:message name="BusinessException">
+        <wsdl:part name="BusinessException" element="ns0:BusinessFaultType"/>
+    </wsdl:message>
+</wsdl:definitions>

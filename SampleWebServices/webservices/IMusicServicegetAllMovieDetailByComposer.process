@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://benchresources.in/entities/music" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlPfx="http://benchresources.in/services/MusicService/">
+    <wsdl:import namespace="http://benchresources.in/services/MusicService/" location="/webservices/WSDL.wsdl"/>
+    <pd:name>webservices/IMusicServicegetAllMovieDetailByComposer.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="wsdlPfx:getAllMovieDetailByComposer"/>
+    <pd:startX>128</pd:startX>
+    <pd:startY>141</pd:startY>
+    <pd:returnBindings>
+        <wsdlPfx:getAllMovieDetailByComposerResponse>
+            <parameters>
+                <ns:MusicListResponseType>
+                    <ns:composer>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/ns:MusicListResponseType/ns:composer"/>
+                    </ns:composer>
+                    <xsl:copy-of select="$SOAPRequestReply/outputMessage/ns:MusicListResponseType/ns:MovieListType"/>
+                </ns:MusicListResponseType>
+            </parameters>
+        </wsdlPfx:getAllMovieDetailByComposerResponse>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="wsdlPfx:getAllMovieDetailByComposerResponse"/>
+    <pd:endX>700</pd:endX>
+    <pd:endY>129</pd:endY>
+    <pd:errorSchemas>
+        <Schema1 wsMsgRef="wsdlPfx:BusinessException"/>
+    </pd:errorSchemas>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1490990877420</pd:targetNamespace>
+    <pd:activity name="SOAPRequestReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
+        <pd:x>412</pd:x>
+        <pd:y>159</pd:y>
+        <config>
+            <timeout>0</timeout>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <timeoutType>Seconds</timeoutType>
+            <service>wsdlPfx:MusicService</service>
+            <servicePort>MusicServicePort</servicePort>
+            <operation>getAllMovieDetailByComposer</operation>
+            <soapAction>http://benchresources.in/services/MusicService/getAllMovieDetailByComposer</soapAction>
+            <endpointURL>http://localhost:8080/ApacheCXF-JAX-WS-Top-Down-Spring-Hibernate/services/music/MusicService?wsdl</endpointURL>
+            <authScheme>NONE</authScheme>
+        </config>
+        <pd:inputBindings>
+            <inputMessage>
+                <ns:MusicListRequestType>
+                    <ns:composerName>
+                        <xsl:value-of select="$Start/wsdlPfx:getAllMovieDetailByComposer/parameters/ns:MusicListRequestType/ns:composerName"/>
+                    </ns:composerName>
+                </ns:MusicListRequestType>
+            </inputMessage>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>SOAPRequestReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPRequestReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

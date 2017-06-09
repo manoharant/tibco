@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:ns1="http://www.tibco.com/schemas/sampleproj/schemas/Output.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1489522517343" xmlns:ns0="http://www.tibco.com/schemas/sampleproj/schemas/Input.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://xmlns.example.com/1489522517343">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/sampleproj/schemas/Input.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/sampleproj/schemas/Input.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Addition">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="number1" type="xs:int"/>
+                        <xs:element name="number2" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/sampleproj/schemas/Output.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/sampleproj/schemas/Output.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Output">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="result" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="WSDL-service2">
+        <wsdl:port name="PortTypeEndpoint2" binding="tns:PortTypeEndpoint2Binding">
+            <soap:address location="http://localhost:8085/wsdl/WSDL-service2.serviceagent/PortTypeEndpoint2"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType">
+        <wsdl:operation name="Addition">
+            <wsdl:input message="tns:Input"/>
+            <wsdl:output message="tns:Output"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PortTypeEndpoint2Binding" type="tns:PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Addition">
+            <soap:operation style="document" soapAction="/wsdl/WSDL-service2.serviceagent/PortTypeEndpoint2/Addition"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="part1"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="part1"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="Input">
+        <wsdl:part name="part1" element="ns0:Addition"/>
+    </wsdl:message>
+    <wsdl:message name="Output">
+        <wsdl:part name="part1" element="ns1:Output"/>
+    </wsdl:message>
+</wsdl:definitions>

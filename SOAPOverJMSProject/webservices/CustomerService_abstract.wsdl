@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:tns="http://www.example.mano.com/CustomerService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="CustomerService" targetNamespace="http://www.example.mano.com/CustomerService/">
+    <wsdl:types>
+        <xs:schema xmlns:tns="http://www.example.mano.com/CustomerService/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.mano.com/CustomerService/" version="1.0">
+            <xs:import namespace="http://www.example.mano.com/CustomerService/"/>
+            <xs:element name="GetCustomerRequest" type="tns:GetCustomerRequestType"/>
+            <xs:element name="GetCustomerResponse" type="tns:GetCustomerResponseType"/>
+            <xs:complexType name="GetCustomerRequestType">
+                <xs:sequence>
+                    <xs:element name="customerNumber" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetCustomerResponseType">
+                <xs:sequence>
+                    <xs:element name="customerNumber" type="xs:int"/>
+                    <xs:element name="customerName" type="xs:string"/>
+                    <xs:element name="contactLastName" type="xs:string"/>
+                    <xs:element name="contactFirstName" type="xs:string"/>
+                    <xs:element name="phone" type="xs:string"/>
+                    <xs:element name="addressLine1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="addressLine2" type="xs:string"/>
+                    <xs:element name="city" type="xs:string"/>
+                    <xs:element minOccurs="0" name="state" type="xs:string"/>
+                    <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+                    <xs:element name="country" type="xs:string"/>
+                    <xs:element minOccurs="0" name="salesRepEmployeeNumber" type="xs:int"/>
+                    <xs:element minOccurs="0" name="creditLimit" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getCustomerByCustomerNumberResponse">
+        <wsdl:part element="tns:GetCustomerResponse" name="parameters">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCustomerByCustomerNumber">
+        <wsdl:part element="tns:GetCustomerRequest" name="parameters">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="ICustomerService">
+        <wsdl:operation name="getCustomerByCustomerNumber">
+            <wsdl:input message="tns:getCustomerByCustomerNumber" name="getCustomerByCustomerNumber">
+    </wsdl:input>
+            <wsdl:output message="tns:getCustomerByCustomerNumberResponse" name="getCustomerByCustomerNumberResponse">
+    </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CustomerServiceSoapBinding" type="tns:ICustomerService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getCustomerByCustomerNumber">
+            <soap:operation soapAction="http://www.example.mano.com/CustomerService/getCustomerByCustomerNumber" style="document"/>
+            <wsdl:input name="getCustomerByCustomerNumber">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getCustomerByCustomerNumberResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CustomerService">
+        <wsdl:port binding="tns:CustomerServiceSoapBinding" name="CustomerServicePort">
+            <soap:address location="http://localhost:8080/ApacheCXF-JAX-WS-Top-Down-Spring-Hibernate/services/customer/CustomerService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

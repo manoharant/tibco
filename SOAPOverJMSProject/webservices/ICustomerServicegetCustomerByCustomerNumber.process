@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlPfx="http://www.example.mano.com/CustomerService/">
+    <wsdl:import namespace="http://www.example.mano.com/CustomerService/" location="/webservices/CustomerService_abstract.wsdl"/>
+    <pd:name>webservices/ICustomerServicegetCustomerByCustomerNumber.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="wsdlPfx:getCustomerByCustomerNumber"/>
+    <pd:startX>188</pd:startX>
+    <pd:startY>130</pd:startY>
+    <pd:returnBindings>
+        <wsdlPfx:getCustomerByCustomerNumberResponse>
+            <parameters>
+                <wsdlPfx:GetCustomerResponse>
+                    <customerNumber>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/customerNumber"/>
+                    </customerNumber>
+                    <customerName>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/customerName"/>
+                    </customerName>
+                    <contactLastName>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/contactLastName"/>
+                    </contactLastName>
+                    <contactFirstName>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/contactFirstName"/>
+                    </contactFirstName>
+                    <phone>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/phone"/>
+                    </phone>
+                    <addressLine1>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/addressLine1"/>
+                    </addressLine1>
+                    <xsl:if test="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/addressLine2">
+                        <addressLine2>
+                            <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/addressLine2"/>
+                        </addressLine2>
+                    </xsl:if>
+                    <city>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/city"/>
+                    </city>
+                    <xsl:if test="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/state">
+                        <state>
+                            <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/state"/>
+                        </state>
+                    </xsl:if>
+                    <xsl:if test="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/postalCode">
+                        <postalCode>
+                            <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/postalCode"/>
+                        </postalCode>
+                    </xsl:if>
+                    <country>
+                        <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/country"/>
+                    </country>
+                    <xsl:if test="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/salesRepEmployeeNumber">
+                        <salesRepEmployeeNumber>
+                            <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/salesRepEmployeeNumber"/>
+                        </salesRepEmployeeNumber>
+                    </xsl:if>
+                    <xsl:if test="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/creditLimit">
+                        <creditLimit>
+                            <xsl:value-of select="$SOAPRequestReply/outputMessage/wsdlPfx:GetCustomerResponse/creditLimit"/>
+                        </creditLimit>
+                    </xsl:if>
+                </wsdlPfx:GetCustomerResponse>
+            </parameters>
+        </wsdlPfx:getCustomerByCustomerNumberResponse>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="wsdlPfx:getCustomerByCustomerNumberResponse"/>
+    <pd:endX>881</pd:endX>
+    <pd:endY>131</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1491123183560</pd:targetNamespace>
+    <pd:activity name="SOAPRequestReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
+        <pd:x>527</pd:x>
+        <pd:y>136</pd:y>
+        <config>
+            <timeout>0</timeout>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <timeoutType>Seconds</timeoutType>
+            <service>wsdlPfx:CustomerService</service>
+            <servicePort>CustomerServicePort</servicePort>
+            <operation>getCustomerByCustomerNumber</operation>
+            <soapAction>http://www.example.mano.com/CustomerService/getCustomerByCustomerNumber</soapAction>
+            <endpointURL>http://localhost:8085/ApacheCXF-JAX-WS-Top-Down-Spring-Hibernate/services/customer/CustomerService</endpointURL>
+            <authScheme>NONE</authScheme>
+        </config>
+        <pd:inputBindings>
+            <inputMessage>
+                <wsdlPfx:GetCustomerRequest>
+                    <customerNumber>
+                        <xsl:value-of select="$Start/wsdlPfx:getCustomerByCustomerNumber/parameters/wsdlPfx:GetCustomerRequest/customerNumber"/>
+                    </customerNumber>
+                </wsdlPfx:GetCustomerRequest>
+            </inputMessage>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>SOAPRequestReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPRequestReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://benchresources.in/entities/music" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://xmlns.example.com/1490990877338" xmlns:pfx="http://benchresources.in/services/MusicService/">
+    <wsdl:import namespace="http://benchresources.in/services/MusicService/" location="/webservices/WSDL.wsdl"/>
+    <wsdl:import namespace="http://xmlns.example.com/1490990877338" location="/schema/WSDL_concreate.wsdl"/>
+    <pd:name>Tester/Process Definition.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>105</pd:startX>
+    <pd:startY>120</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>686</pd:endX>
+    <pd:endY>113</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1490991867334</pd:targetNamespace>
+    <pd:activity name="SOAPRequestReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
+        <pd:x>373</pd:x>
+        <pd:y>156</pd:y>
+        <config>
+            <timeout>0</timeout>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <timeoutType>Seconds</timeoutType>
+            <service>pfx2:WSDL-service0</service>
+            <servicePort>IMusicServiceEndpoint0</servicePort>
+            <operation>getAllMovieDetailByComposer</operation>
+            <soapAction>/webservices/WSDL-service0.serviceagent/IMusicServiceEndpoint0/getAllMovieDetailByComposer</soapAction>
+            <endpointURL>http://localhost:8080/ApacheCXF-JAX-WS-Top-Down-Spring-Hibernate/services/music/MusicService</endpointURL>
+            <authScheme>NONE</authScheme>
+            <sharedChannels>
+                <jmsChannel>
+                    <NamingURL>tibjmsnaming://localhost:7222</NamingURL>
+                    <NamingInitialContextFactory>com.tibco.tibjms.naming.TibjmsInitialContextFactory</NamingInitialContextFactory>
+                    <NamingPrincipal>admin</NamingPrincipal>
+                    <NamingCredential/>
+                    <ConnectionFactory>QueueConnectionFactory</ConnectionFactory>
+                    <JMSTo>queue.sample</JMSTo>
+                    <JMSMessageType>Bytes</JMSMessageType>
+                    <JMSDeliveryMode>PERSISTENT</JMSDeliveryMode>
+                    <JMSPriority>4</JMSPriority>
+                    <JMSTimeToLive>0</JMSTimeToLive>
+                    <JMSUserName>admin</JMSUserName>
+                    <JMSPassword/>
+                </jmsChannel>
+            </sharedChannels>
+        </config>
+        <pd:inputBindings>
+            <inputMessage>
+                <ns:MusicListRequestType>
+                    <ns:composerName>
+                        <xsl:value-of select="&quot;AR Rahman &quot;"/>
+                    </ns:composerName>
+                </ns:MusicListRequestType>
+            </inputMessage>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>SOAPRequestReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPRequestReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

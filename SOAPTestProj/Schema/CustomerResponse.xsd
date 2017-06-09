@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/SOAPTestProj/Schema/Schema.xsd2"
+	 targetNamespace="http://www.tibco.com/schemas/SOAPTestProj/Schema/Schema.xsd2"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="CustomerResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CustomerName" type="xs:string"/>
+				<xs:element name="ContactLastName" type="xs:string"/>
+				<xs:element name="ContactFirstName" type="xs:string"/>
+				<xs:element name="Phone" type="xs:string"/>
+				<xs:element name="AddressLine1" type="xs:string"/>
+				<xs:element name="AddressLine2" type="xs:string"/>
+				<xs:element name="City" type="xs:string"/>
+				<xs:element name="State" type="xs:string"/>
+				<xs:element name="PostalCode" type="xs:string"/>
+				<xs:element name="Country" type="xs:string"/>
+				<xs:element name="CreditLimit" type="xs:decimal"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

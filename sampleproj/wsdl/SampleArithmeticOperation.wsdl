@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns2="http://www.tibco.com/schemas/sampleproj/schemas/Output.xsd" xmlns:ns="http://www.tibco.com/schemas/sampleproj/schemas/Input.xsd" xmlns:tns="http://xmlns.example.com/1489522314737" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1489522314737">
+    <import namespace="http://www.tibco.com/schemas/sampleproj/schemas/Input.xsd" location="../schemas/Input.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/sampleproj/schemas/Output.xsd" location="../schemas/Output.xsd"/>
+    <message name="Input">
+        <part name="part1" element="ns:Addition"/>
+    </message>
+    <message name="Output">
+        <part name="part1" element="ns2:Output"/>
+    </message>
+    <portType name="PortType">
+        <operation name="Addition">
+            <input message="tns:Input"/>
+            <output message="tns:Output"/>
+        </operation>
+        <operation name="Multiply">
+            <input message="tns:Input"/>
+            <output message="tns:Output"/>
+        </operation>
+    </portType>
+</definitions>

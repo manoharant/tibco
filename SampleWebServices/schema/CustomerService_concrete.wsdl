@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:tns="http://xmlns.example.com/1491123183483" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns0="http://www.example.mano.com/CustomerService/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://xmlns.example.com/1491123183483">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.mano.com/CustomerService/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:import namespace="http://www.example.mano.com/CustomerService/"/>
+            <xs:complexType name="GetCustomerRequestType">
+                <xs:sequence>
+                    <xs:element name="customerNumber" form="unqualified" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GetCustomerResponseType">
+                <xs:sequence>
+                    <xs:element name="customerNumber" form="unqualified" type="xs:int"/>
+                    <xs:element name="customerName" form="unqualified" type="xs:string"/>
+                    <xs:element name="contactLastName" form="unqualified" type="xs:string"/>
+                    <xs:element name="contactFirstName" form="unqualified" type="xs:string"/>
+                    <xs:element name="phone" form="unqualified" type="xs:string"/>
+                    <xs:element name="addressLine1" form="unqualified" type="xs:string"/>
+                    <xs:element name="addressLine2" form="unqualified" type="xs:string" minOccurs="0"/>
+                    <xs:element name="city" form="unqualified" type="xs:string"/>
+                    <xs:element name="state" form="unqualified" type="xs:string" minOccurs="0"/>
+                    <xs:element name="postalCode" form="unqualified" type="xs:string" minOccurs="0"/>
+                    <xs:element name="country" form="unqualified" type="xs:string"/>
+                    <xs:element name="salesRepEmployeeNumber" form="unqualified" type="xs:int" minOccurs="0"/>
+                    <xs:element name="creditLimit" form="unqualified" type="xs:decimal" minOccurs="0"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="GetCustomerRequest" type="ns0:GetCustomerRequestType"/>
+            <xs:element name="GetCustomerResponse" type="ns0:GetCustomerResponseType"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="CustomerService_abstract-service0">
+        <wsdl:port name="ICustomerServiceEndpoint0" binding="tns:ICustomerServiceEndpoint0Binding">
+            <soap:address location="http://localhost:8085/webservices/CustomerService_abstract-service0.serviceagent/ICustomerServiceEndpoint0"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="ICustomerService">
+        <wsdl:operation name="getCustomerByCustomerNumber">
+            <wsdl:input message="tns:getCustomerByCustomerNumber"/>
+            <wsdl:output message="tns:getCustomerByCustomerNumberResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ICustomerServiceEndpoint0Binding" type="tns:ICustomerService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getCustomerByCustomerNumber">
+            <soap:operation style="document" soapAction="/webservices/CustomerService_abstract-service0.serviceagent/ICustomerServiceEndpoint0/getCustomerByCustomerNumber"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="getCustomerByCustomerNumber">
+        <wsdl:part name="parameters" element="ns0:GetCustomerRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getCustomerByCustomerNumberResponse">
+        <wsdl:part name="parameters" element="ns0:GetCustomerResponse"/>
+    </wsdl:message>
+</wsdl:definitions>
